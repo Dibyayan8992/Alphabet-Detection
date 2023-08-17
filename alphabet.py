@@ -42,15 +42,15 @@ while(True):
     #Converting cv2 image to PIL format
     im_pil = Image.fromarray(roi)
     im_bw = im_pil.convert('L')
-    im_bw_resized = im_bw.resize((28,28), Image.ANTIALIAS)
+    im_bw_resized = im_bw.resize((22,30), Image.ANTIALIAS)
     #Invert the image
     im_bw_resized_inverted = PIL.ImageOps.invert(im_bw_resized)
     pixel_filter = 20
     min_pixel = np.percentile(im_bw_resized_inverted, pixel_filter)
-    im_bw_resized_inverted_scaled = np.clip(im_bw_resized_inverted-min_pixel, 0, 255)
+    im_bw_resized_inverted_scaled = np.clip(im_bw_resized_inverted-min_pixel, 0, 225)
     max_pixel - np.max(im_bw_resized_inverted)
     im_bw_resized_inverted_scaled = np.asarray(im_bw_resized_inverted_scaled)/max_pixel
-    test_sample = np.array(im_bw_resized_inverted_scaled).reshape(1,784)
+    test_sample = np.array(im_bw_resized_inverted_scaled).reshape(1,660)
     test_pred = model.preict(test_sample)
     print('Predicted number is: ', test_pred)
     cv2.imshow('frame', gray)
